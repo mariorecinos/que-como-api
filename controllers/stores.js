@@ -35,7 +35,7 @@ router.put('/store/:id', async (req, res) => {
   } catch (error) {
     res.status(401).json({message: 'Sorry Something Went Wrong Updating Store'})
   }
-})
+});
 
 // Create Route
 router.post('/', async (req, res) => {
@@ -56,4 +56,7 @@ router.post('/:id/notes', async (req, res) => {
   } catch (error) {
     res.status(401).json({message: 'Sorry Something Went Wrong'});
   }
-})
+});
+
+// Export The Router Object
+module.exports = router;
