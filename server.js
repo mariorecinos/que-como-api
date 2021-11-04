@@ -50,9 +50,24 @@ admin.initalizeApp({
 
 });
 
-admin.initalizeApp({
+// authenticate user function
+app.use(async function(req, res, next) {
+  const token = req.get('Authorization');
 
-})
+  if(token) {
+    const authUser = await admin.auth().verifyIdToken(token.replace('Bearer ', ''))
+    req.user = authUser;
+  }
+
+  next();
+
+});
+
+// router auth middleware function
+function isAuthenticated(req, res, next) {
+  if(req.user) return next();
+  else res.status(401).json({message: 'unauthorized'});
+}
 
 // Mount Routes
 app.get('/api', (req, res) => {
@@ -60,7 +75,7 @@ app.get('/api', (req, res) => {
 });
 
 //Use Controllers
-app.use('/api/stores', storesController);
+app.use('/api/stores', isAuthenticated, storesController);
 
 // Catch All Route - for catching request for routes that are not found
 app.get('/api/*', (req, res) => {
