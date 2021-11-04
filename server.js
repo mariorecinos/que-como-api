@@ -12,7 +12,7 @@ const app = express();
 require('dotenv').config();
 const {
   DATABASE_URL,
-  PORT=3001
+  PORT
 } = process.env
 
 // Configure Connectionj to MongoDB
@@ -24,8 +24,14 @@ db.on('disconnected', () => console.log('Disconnected to MongoDB'));
 db.on('error', (error) => console.log('MongoDB has an error ' + error.message));
 
 // Mount Middleware
+app.use(cors());
+app.use(express.json());
+app.use(morgan('dev'));
 
-// Authorization Middleware
+// Mount Routes
+app.get('/api', (req, res) => {
+  res.json({message: 'Bienvenido a Que Como!'})
+});
 
 // Tell The App To Listen
 app.listen(PORT, () => console.log(`Express is listening on port:${PORT}`));
