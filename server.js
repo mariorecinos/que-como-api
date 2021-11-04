@@ -36,5 +36,10 @@ app.get('/api', (req, res) => {
 //Use Controllers
 app.use('/api/stores', storesController);
 
+// Catch All Route - for catching request for routes that are not found
+app.get('/api/*', (req, res) => {
+  res.status(404).json({message: 'That route was not found'})
+});
+
 // Tell The App To Listen
 app.listen(PORT, () => console.log(`Express is listening on port:${PORT}`));
