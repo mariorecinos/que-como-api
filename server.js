@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const storesController = require('./controllers/stores');
+const admin = require('firebase-admin');
 
 
 // Initialize Expres App
@@ -30,6 +31,28 @@ db.on('error', (error) => console.log('MongoDB has an error ' + error.message));
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+
+// Authorization Middleware
+
+admin.initalizeApp({
+  credential: admin.credential.cert({
+    "type": "service_account",
+    "project_id": "que-como-a4442",
+    "private_key_id": PRIVATE_KEY_ID,
+    "private_key": PRIVATE_KEY.replace(/\\n/g, '\n'),
+    "client_email": "firebase-adminsdk-iabtc@que-como-a4442.iam.gserviceaccount.com",
+    "client_id": CLIENT_ID,
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-iabtc%40que-como-a4442.iam.gserviceaccount.com"
+  })
+
+});
+
+admin.initalizeApp({
+
+})
 
 // Mount Routes
 app.get('/api', (req, res) => {
