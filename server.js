@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const storesController = require('./controllers/stores');
 
 // Initialize Expres App
 const app = express();
@@ -31,6 +32,9 @@ app.use(morgan('dev'));
 app.get('/api', (req, res) => {
   res.json({message: 'Bienvenido a Que Como!'})
 });
+
+//Use Controllers
+app.use('/api/stores', storesController);
 
 // Tell The App To Listen
 app.listen(PORT, () => console.log(`Express is listening on port:${PORT}`));
