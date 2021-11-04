@@ -57,6 +57,7 @@ app.use(async function(req, res, next) {
   if(token) {
     const authUser = await admin.auth().verifyIdToken(token.replace('Bearer ', ''))
     req.user = authUser;
+    
   }
 
   next();
