@@ -36,3 +36,24 @@ router.put('/store/:id', async (req, res) => {
     res.status(401).json({message: 'Sorry Something Went Wrong Updating Store'})
   }
 })
+
+// Create Route
+router.post('/', async (req, res) => {
+  try {
+      res.json(await Store.create(req.body));
+  } catch (error) {
+    res.status(401).json({message: 'Please Login To Create a Store'});
+  }
+});
+
+// Create Review Route
+router.post('/:id/notes', async (req, res) => {
+  try {
+      const store = await Store.findById(req.params.id);
+      store.review.push(req.body); // pushes the data into the notes array in memory only
+      await store.save(); // we call save to persist the changes in MongoDB
+      res.json(store);
+  } catch (error) {
+    res.status(401).json({message: 'Sorry Something Went Wrong'});
+  }
+})
