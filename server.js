@@ -5,15 +5,18 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const storesController = require('./controllers/stores');
 
+
 // Initialize Expres App
 const app = express();
 
 // Configure Settings
 require('dotenv').config();
 const {
+  PORT,
+  CLIENT_ID,
+  PRIVATE_KEY,
   DATABASE_URL,
-  PORT
-} = process.env
+  PRIVATE_KEY_ID, } = process.env
 
 // Configure Connectionj to MongoDB
 mongoose.connect(DATABASE_URL);
