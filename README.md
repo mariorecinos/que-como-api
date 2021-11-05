@@ -1,5 +1,5 @@
 # Que-Como
-A Site were you can keep track of your ps
+A Site were you can keep track of your Spots To Eat
 # Technologies Used
 * React
 * MongoDB Atlas
