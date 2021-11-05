@@ -34,7 +34,7 @@ app.use(morgan('dev'));
 
 // Authorization Middleware
 
-admin.initalizeApp({
+admin.initializeApp({
   credential: admin.credential.cert({
     "type": "service_account",
     "project_id": "que-como-a4442",
@@ -57,7 +57,7 @@ app.use(async function(req, res, next) {
   if(token) {
     const authUser = await admin.auth().verifyIdToken(token.replace('Bearer ', ''))
     req.user = authUser;
-    
+
   }
 
   next();

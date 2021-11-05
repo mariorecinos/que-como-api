@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 });
 
 // Create Review Route
-router.post('/:id/notes', async (req, res) => {
+router.post('/:id/review', async (req, res) => {
   try {
       const store = await Store.findById(req.params.id);
       store.review.push(req.body); // pushes the data into the notes array in memory only
